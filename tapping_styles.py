@@ -1,6 +1,6 @@
 
 
-def kddk_full_wrist_alt(pattern, starting_finger=None):
+def kddk_wrist_alt(pattern, starting_finger=None):
     layout = [1,0,0,1]
     if starting_finger is None:
         if pattern and pattern[0]:
@@ -125,9 +125,9 @@ def ddddkkkk_dual_rotation(pattern, d_starting_finger=0, k_starting_finger=7):
     
 
 four_key_styles = [
-    kddk_full_wrist_alt,
-    kddk_full_roll,
+    kddk_wrist_alt,
     kddk_half_roll,
+    kddk_full_roll,
     ddkk_dual_rotation
 ]
 eight_key_styles = [
