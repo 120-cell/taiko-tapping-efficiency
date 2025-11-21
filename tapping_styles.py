@@ -1,4 +1,4 @@
-
+from collections import Counter
 
 def kddk_wrist_alt(pattern, starting_finger=None):
     layout = [1,0,0,1]
@@ -24,6 +24,7 @@ def kddk_wrist_alt(pattern, starting_finger=None):
 
 def kddk_full_roll(pattern, starting_finger=None):
     layout = [1,0,0,1]
+    firsts_in_wrist = 0
     if starting_finger is None:
         wrist = 0
     else:
@@ -31,22 +32,20 @@ def kddk_full_roll(pattern, starting_finger=None):
             raise ValueError('starting finger does not match pattern color')
         wrist = starting_finger // 2
     first_note = None
+    first = False
     
     fingering = []
-    for note in pattern:
-        if note == first_note:
+    for i, note in enumerate(pattern):
+        if first and note != first_note:
+            first = False
+        else:
             wrist = 1 - wrist
-
+            first = True
+            first_note = note
         if note:
             fingering.append(0 + 3 * wrist)
         else:
             fingering.append(1 + 1 * wrist)
-
-        if first_note == None:
-            first_note = note
-        elif note != first_note:
-            wrist = 1 - wrist
-            first_note = None
     return layout, fingering
 
 
